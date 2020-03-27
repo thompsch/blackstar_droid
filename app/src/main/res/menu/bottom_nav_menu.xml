@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_controls"
+        android:icon="@drawable/nas"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_effects"
+        android:icon="@drawable/radius"
+        android:title="@string/title_dashboard" />
+
+    <item
+        android:id="@+id/navigation_presets"
+        android:icon="@android:drawable/btn_star"
+        android:title="@string/title_notifications" />
+    <item
+        android:id="@+id/navigation_tuner"
+        android:icon="@drawable/metronome"
+        android:title="@string/title_tuner" />
+
+</menu>
