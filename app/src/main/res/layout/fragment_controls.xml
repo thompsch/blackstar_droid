@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:gauge="http://schemas.android.com/apk/res-auto"
     android:paddingStart="5dp"
     android:paddingTop="5dp"
     android:paddingEnd="5dp"
@@ -16,6 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/custom_dropdown"
+        android:entries="@array/voice_types"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,6 +68,7 @@
         app:layout_constraintEnd_toEndOf="@+id/labelVoice"
         app:layout_constraintTop_toTopOf="@id/volume_slider" />
 
+
     <TextView
         android:id="@+id/labelGain"
         android:layout_width="wrap_content"
@@ -92,62 +96,131 @@
         android:layout_height="310dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="56dp"
-        android:background="@drawable/empty_rectangle"
+        android:background="@drawable/custom_dropdown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gain_slider" />
 
-
-    <SeekBar
-        android:id="@+id/treble_slider"
-        android:layout_width="200dp"
-        android:layout_height="0dp"
-        android:rotation="-90"
+    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+        android:id="@+id/verticalSeekBarWrapperBass"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="@+id/EQ_box"
-        app:layout_constraintTop_toTopOf="@+id/EQ_box"
-        app:layout_constraintRight_toLeftOf="@id/v_guide_3"
-        tools:layout_editor_absoluteX="16dp" />
-
-
-    <SeekBar
-        android:id="@+id/bass_slider"
-        android:layout_width="200dp"
-        android:layout_height="0dp"
-        android:rotation="-90"
-        app:layout_constraintBottom_toBottomOf="@+id/EQ_box"
-        app:layout_constraintTop_toTopOf="@+id/EQ_box"
         app:layout_constraintRight_toLeftOf="@id/v_guide_1"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintTop_toTopOf="@+id/EQ_box">
 
-    <SeekBar
-        android:id="@+id/middle_slider"
-        android:layout_width="200dp"
-        android:layout_height="0dp"
-        android:rotation="-90"
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+            android:id="@+id/bass_slider"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:splitTrack="false"
+            app:seekBarRotation="CW270" /> <!-- Rotation: CW270 or CW270 -->
+    </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
+    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+        android:id="@+id/verticalSeekBarWrapperMid"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="@+id/EQ_box"
         app:layout_constraintTop_toTopOf="@+id/EQ_box"
         app:layout_constraintRight_toLeftOf="@id/v_guide_2"
-        tools:layout_editor_absoluteX="21dp" />
+        tools:layout_editor_absoluteX="21dp">
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+            android:id="@+id/middle_slider"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:splitTrack="false"
+            app:seekBarRotation="CW270" /> <!-- Rotation: CW270 or CW270 -->
+    </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
+    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+        android:id="@+id/verticalSeekBarWrapperTreble"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toBottomOf="@+id/EQ_box"
+        app:layout_constraintRight_toLeftOf="@id/v_guide_3"
+        app:layout_constraintTop_toTopOf="@+id/EQ_box">
+
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+            android:id="@+id/treble_slider"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:splitTrack="false"
+            app:seekBarRotation="CW270" /> <!-- Rotation: CW270 or CW270 -->
+    </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v_guide_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="154dp" />
+        app:layout_constraintGuide_begin="56dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v_guide_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
+        app:layout_constraintGuide_begin="113dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v_guide_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="255dp" />
+        app:layout_constraintGuide_begin="170dp" />
 
+    <TextView
+        android:id="@+id/labelbass"
+        android:layout_width="49dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:text="BASS"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/EQ_box"
+        app:layout_constraintTop_toBottomOf="@+id/verticalSeekBarWrapperBass" />
+
+    <TextView
+        android:id="@+id/labelmid"
+        android:layout_width="35dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="12dp"
+        android:text="MID"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/labeltreble"
+        app:layout_constraintStart_toEndOf="@+id/labelbass"
+        app:layout_constraintTop_toBottomOf="@+id/verticalSeekBarWrapperMid" />
+
+    <TextView
+        android:id="@+id/labeltreble"
+        android:layout_width="58dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="12dp"
+        android:text="TREBLE"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/EQ_box"
+        app:layout_constraintTop_toBottomOf="@+id/verticalSeekBarWrapperTreble" />
+
+    <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+        android:id="@+id/verticalSeekBarWrapperIsf"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteX="21dp">
+
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+            android:id="@+id/isf_slider"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/filled_rectangle"
+            android:splitTrack="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:seekBarRotation="CW270" />
+    </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

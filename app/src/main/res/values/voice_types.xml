@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="voice_types">
+        <item>Clean Warm</item>
+        <item>Clean Bright</item>
+        <item>Crunchy</item>
+        <item>Super Crunch</item>
+        <item>Overdrive 1</item>
+        <item>Overdrive 2</item>
+    </array>
+</resources>

@@ -25,7 +25,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0' //custom vertical seekbars
+    implementation 'com.github.akapelrud:Rotary-Seekbar:v1.0.0' //rotary seekbar
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
