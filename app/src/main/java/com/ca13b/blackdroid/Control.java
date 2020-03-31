@@ -15,6 +15,7 @@ public class Control {
         this.controlName = name;
         this.minValue = minValue;
         this.maxValue = maxValue;
+        this.controlValue = 0;
     }
 
     @Override

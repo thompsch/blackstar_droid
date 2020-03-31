@@ -8,4 +8,10 @@
         <item>Overdrive 1</item>
         <item>Overdrive 2</item>
     </array>
+    <array name="reverb_types">
+        <item>Room</item>
+        <item>Hall</item>
+        <item>Spring</item>
+        <item>Plate</item>
+    </array>
 </resources>

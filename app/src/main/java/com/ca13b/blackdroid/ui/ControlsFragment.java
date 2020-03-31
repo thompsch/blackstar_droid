@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -53,9 +52,6 @@ public class ControlsFragment extends Fragment {
         ctrlIsf = amp.Controls.get(7);
 
 
-        //TODO: get current settings and set sliders accordingly!
-
-
         return root;
     }
 
@@ -74,6 +70,22 @@ public class ControlsFragment extends Fragment {
         voices.setOnItemSelectedListener(ddChange);
         sbIsf = root.findViewById(R.id.isf_slider);
         sbIsf.setOnSeekBarChangeListener(seekBarChanged);
+
+        getInitialValues();
+    }
+
+    private void getInitialValues(){
+
+
+        //TODO: get amp settings and set controls accordingly!
+
+        sbVolume.setProgress(ctrlVolume.controlValue);
+        sbGain.setProgress(ctrlGain.controlValue);
+        sbBass.setProgress(ctrlBass.controlValue);
+        sbMid.setProgress(ctrlMid.controlValue);
+        sbTreble.setProgress(ctrlTreble.controlValue);
+        sbIsf.setProgress(ctrlIsf.controlValue);
+        voices.setSelection(ctrlVoice.controlValue);
     }
 
     private AdapterView.OnItemSelectedListener ddChange = new AdapterView.OnItemSelectedListener() {
@@ -126,9 +138,9 @@ public class ControlsFragment extends Fragment {
                 }
             }
             if (ctrlTemp == null) return;
+            ctrlTemp.controlValue = progress;
             amp.SetControlValue(ctrlTemp, (progress*ctrlTemp.maxValue)/100);
-            Toast.makeText(getContext(), String.format("I set %s to %d", ctrlTemp.controlName, progress), Toast.LENGTH_LONG).show();
-
+            //Toast.makeText(getContext(), String.format("I set %s to %d", ctrlTemp.controlName, progress), Toast.LENGTH_LONG).show();
         }
     };
 }

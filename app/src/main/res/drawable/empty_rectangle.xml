@@ -10,6 +10,8 @@
         android:width="1dp"
         android:color="#000" />
 
+    <solid android:color="#fff"/>
+
     <padding
         android:bottom="2dip"
         android:left="2dip"
