@@ -23,33 +23,52 @@ public class EffectsFragment extends Fragment {
 
     private EffectsViewModel effectsViewModel;
     private BlackstarAmp amp;
+
     private Spinner reverb_type_list;
     private SeekBar sbReverbSize;
     private SeekBar sbReverbLevel;
     private ImageButton reverbPowerSwitch;
     private View reverbPowerLed;
-
     Control ctrlReverbSize;
     Control ctrlReverbLevel;
     Control ctrlReverbType;
     Control ctrlReverbPower;
+    boolean reverbPowerOn;
 
-    boolean powerOn;
+    private Spinner delay_type_list;
+    private SeekBar sbDelayFeedback;
+    private SeekBar sbDelayLevel;
+    private SeekBar sbDelayTime;
+    private ImageButton delayPowerSwitch;
+    private View delayPowerLed;
+    Control ctrlDelayFeedback;
+    Control ctrlDelayLevel;
+    Control ctrlDelayTime;
+    Control ctrlDelayType;
+    Control ctrlDelayPower;
+    boolean delayPowerOn;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        amp = ((MainActivity)getActivity()).blackstarAmp;
+
         effectsViewModel =
                 ViewModelProviders.of(this).get(EffectsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_effects, container, false);
 
-        initializeControls(root);
+        View reverb = root.findViewById(R.id.reverb_pedal);
+        initializeReverbControls(reverb);
+
+        View delay = root.findViewById(R.id.delay_pedal);
+        initializeDelayControls(delay);
 
         return root;
     }
 
 
-    private void initializeControls(final View root) {
-        amp = ((MainActivity)getActivity()).blackstarAmp;
+    private void initializeReverbControls(final View root) {
+
         ctrlReverbLevel = amp.Controls.get(32);
         ctrlReverbSize = amp.Controls.get(30);
         ctrlReverbType = amp.Controls.get(29);
@@ -67,31 +86,84 @@ public class EffectsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                powerOn = !powerOn;
-                ctrlReverbPower.controlValue = powerOn ? 1 : 0;
+                reverbPowerOn = !reverbPowerOn;
+                ctrlReverbPower.controlValue = reverbPowerOn ? 1 : 0;
 
-                if (powerOn){
+                if (reverbPowerOn) {
                     reverbPowerLed.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.led_on));
                 } else {
                     reverbPowerLed.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.led_off));
                 }
 
-                amp.SetControlValue(ctrlReverbPower,ctrlReverbPower.controlValue);
+                amp.SetControlValue(ctrlReverbPower, ctrlReverbPower.controlValue);
             }
         });
-        getInitialValues();
+        getInitialReverbValues();
     }
 
-    private void getInitialValues(){
+    private void initializeDelayControls(final View root) {
+        ctrlDelayPower = amp.Controls.get(16);
+        ctrlDelayType = amp.Controls.get(23);
+        ctrlDelayFeedback = amp.Controls.get(24);
+        ctrlDelayLevel = amp.Controls.get(26);
+        ctrlDelayTime = amp.Controls.get(27);
+
+        delay_type_list = root.findViewById(R.id.delay_type_list);
+        delay_type_list.setOnItemSelectedListener(ddChange);
+        sbDelayLevel = root.findViewById(R.id.delay_level_slider);
+        sbDelayLevel.setOnSeekBarChangeListener(seekBarChanged);
+        sbDelayFeedback = root.findViewById(R.id.delay_feedback_slider);
+        sbDelayFeedback.setOnSeekBarChangeListener(seekBarChanged);
+        sbDelayTime = root.findViewById(R.id.delay_time_slider);
+        sbDelayTime.setOnSeekBarChangeListener(seekBarChanged);
+        delayPowerLed = root.findViewById(R.id.delay_power_led);
+        delayPowerSwitch = root.findViewById(R.id.delay_power_switch);
+        delayPowerSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                delayPowerOn = !delayPowerOn;
+                ctrlDelayPower.controlValue = delayPowerOn ? 1 : 0;
+
+                if (delayPowerOn) {
+                    delayPowerLed.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.led_on));
+                } else {
+                    delayPowerLed.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.led_off));
+                }
+
+                amp.SetControlValue(ctrlDelayPower, ctrlDelayPower.controlValue);
+            }
+        });
+
+        getInitialDelayValues();
+
+    }
+    private void getInitialReverbValues(){
         sbReverbLevel.setProgress(ctrlReverbLevel.controlValue);
         sbReverbSize.setProgress(ctrlReverbSize.controlValue);
         reverb_type_list.setSelection(ctrlReverbType.controlValue);
 
-        powerOn = ctrlReverbPower.controlValue == 1;
-        if (powerOn){
+        reverbPowerOn = ctrlReverbPower.controlValue == 1;
+        if (reverbPowerOn){
             reverbPowerLed.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.led_on));
         } else {
             reverbPowerLed.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.led_off));
+        }
+    }
+
+    private void getInitialDelayValues(){
+        sbDelayLevel.setProgress(ctrlDelayLevel.controlValue);
+        sbDelayFeedback.setProgress(ctrlDelayFeedback.controlValue);
+        sbDelayTime.setProgress(ctrlDelayTime.controlValue);
+        delay_type_list.setSelection(ctrlDelayType.controlValue);
+
+        delayPowerOn = !delayPowerOn;
+        ctrlDelayPower.controlValue = delayPowerOn ? 1 : 0;
+
+        if (delayPowerOn) {
+            delayPowerLed.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.led_on));
+        } else {
+            delayPowerLed.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.led_off));
         }
     }
 
@@ -127,6 +199,19 @@ public class EffectsFragment extends Fragment {
                     ctrlTemp = ctrlReverbLevel;
                     break;
                 }
+                case R.id.delay_feedback_slider: {
+                    ctrlTemp = ctrlDelayFeedback;
+                    break;
+                }
+                case R.id.delay_level_slider: {
+                    ctrlTemp = ctrlDelayLevel;
+                    break;
+                }
+                case R.id.delay_time_slider: {
+                    ctrlTemp = ctrlDelayTime;
+                    break;
+                }
+
             }
             if (ctrlTemp == null) return;
             ctrlTemp.controlValue = progress;

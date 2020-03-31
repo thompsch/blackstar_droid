@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="reverb_background">#68969B</color>
+    <color name="delay_background">#9C76E1</color>
+    <color name="mod_background">#C3CE5D</color>
 </resources>

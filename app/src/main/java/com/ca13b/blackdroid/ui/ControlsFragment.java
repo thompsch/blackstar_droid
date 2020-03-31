@@ -37,12 +37,19 @@ public class ControlsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        amp = ((MainActivity)getActivity()).blackstarAmp;
+
         controlsViewModel =
                 ViewModelProviders.of(this).get(ControlsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_controls, container, false);
+
         initializeControls(root);
 
-        amp = ((MainActivity)getActivity()).blackstarAmp;
+        return root;
+    }
+
+    private void initializeControls(final View root) {
         ctrlVoice = amp.Controls.get(1);
         ctrlGain = amp.Controls.get(2);
         ctrlVolume = amp.Controls.get(3);
@@ -52,10 +59,6 @@ public class ControlsFragment extends Fragment {
         ctrlIsf = amp.Controls.get(7);
 
 
-        return root;
-    }
-
-    private void initializeControls(final View root) {
         sbGain = root.findViewById(R.id.gain_slider);
         sbGain.setOnSeekBarChangeListener(seekBarChanged);
         sbVolume = root.findViewById(R.id.volume_slider);
@@ -75,7 +78,6 @@ public class ControlsFragment extends Fragment {
     }
 
     private void getInitialValues(){
-
 
         //TODO: get amp settings and set controls accordingly!
 

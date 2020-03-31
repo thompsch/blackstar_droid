@@ -4,100 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.EffectsFragment">
+    tools:context=".ui.EffectsFragment"
+    android:paddingTop="-10dp">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="336dp"
-        android:layout_height="138dp"
-        android:background="@drawable/empty_rectangle"
-        android:backgroundTint="@color/reverb_background"
-        android:backgroundTintMode="multiply"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <include
+        android:id="@+id/reverb_pedal"
+        layout="@layout/reverb_pedal"
+        android:layout_width="400dp"
+        android:layout_height="142dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="REVERB"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+    <include
+        android:id="@+id/delay_pedal"
+        layout="@layout/delay_pedal"
+        android:layout_width="400dp"
+        android:layout_height="196dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reverb_pedal" />
 
-    <Spinner
-        android:id="@+id/reverb_type_list"
-        android:layout_width="200dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/custom_dropdown"
-        android:entries="@array/reverb_types"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <SeekBar
-        android:id="@+id/reverb_size_slider"
-        android:layout_width="240dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/reverb_type_list" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="SIZE"
-        android:textAlignment="textEnd"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/reverb_size_slider" />
-
-    <SeekBar
-        android:id="@+id/reverb_level_slider"
-        android:layout_width="240dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/reverb_size_slider"
-        app:layout_constraintTop_toBottomOf="@+id/reverb_size_slider" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:text="LEVEL"
-        android:textAlignment="textEnd"
-        app:layout_constraintLeft_toLeftOf="@id/view"
-        app:layout_constraintTop_toTopOf="@+id/reverb_level_slider" />
-
-    <ImageButton
-        android:id="@+id/reverb_power_switch"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:elevation="4dp"
-        android:background="@drawable/stomp_switch"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/reverb_power_led"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:background="@drawable/led_on"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view" />
-
+    <include
+        android:id="@+id/mod_pedal"
+        layout="@layout/mod_pedal"
+        android:layout_width="408dp"
+        android:layout_height="233dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delay_pedal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

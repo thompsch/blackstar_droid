@@ -14,4 +14,16 @@
         <item>Spring</item>
         <item>Plate</item>
     </array>
+    <array name="delay_types">
+        <item>Dunno</item>
+        <item>What</item>
+        <item>Is</item>
+        <item>Here</item>
+    </array>
+    <array name="mod_types">
+        <item>Dunno</item>
+        <item>What</item>
+        <item>Is</item>
+        <item>Here</item>
+    </array>
 </resources>
