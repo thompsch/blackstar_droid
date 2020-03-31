@@ -15,15 +15,15 @@
         <item>Plate</item>
     </array>
     <array name="delay_types">
-        <item>Dunno</item>
-        <item>What</item>
-        <item>Is</item>
-        <item>Here</item>
+        <item>Linear</item>
+        <item>Analog</item>
+        <item>Tape</item>
+        <item>Multi</item>
     </array>
     <array name="mod_types">
-        <item>Dunno</item>
-        <item>What</item>
-        <item>Is</item>
-        <item>Here</item>
+        <item>Phaser</item>
+        <item>Flanger</item>
+        <item>Chorus</item>
+        <item>Tremolo</item>
     </array>
 </resources>

@@ -20,7 +20,7 @@
     <include
         android:id="@+id/delay_pedal"
         layout="@layout/delay_pedal"
-        android:layout_width="400dp"
+        android:layout_width="408dp"
         android:layout_height="196dp"
         android:layout_marginTop="8dp"
         app:layout_constraintHorizontal_bias="0.0"

@@ -6,8 +6,8 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="336dp"
-        android:layout_height="138dp"
+        android:layout_width="334dp"
+        android:layout_height="163dp"
         android:background="@drawable/empty_rectangle"
         android:backgroundTint="@color/reverb_background"
         android:backgroundTintMode="multiply"

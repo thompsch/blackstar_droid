@@ -79,8 +79,8 @@ public class EffectsFragment extends Fragment {
                     ctrlTemp = modPedal.ctrlModDepth;
                     break;
                 }
-                case R.id.mod_feedback_slider: {
-                    ctrlTemp = modPedal.ctrlModFeedback;
+                case R.id.mod_seqval_slider: {
+                    ctrlTemp = modPedal.ctrlModSeqVal;
                     break;
                 }
                 case R.id.mod_manual_slider: {

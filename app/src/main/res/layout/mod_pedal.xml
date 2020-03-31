@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/pedal_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -36,36 +36,40 @@
         android:entries="@array/mod_types"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/pedal_label" />
 
     <SeekBar
-        android:id="@+id/mod_feedback_slider"
+        android:id="@+id/mod_seqval_slider"
         android:layout_width="240dp"
         android:layout_height="20dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/mod_type_list" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/seqval_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FEEDBACK"
         android:textAlignment="textEnd"
+        app:layout_constraintEnd_toStartOf="@+id/mod_seqval_slider"
+        app:layout_constraintHorizontal_bias="0.685"
         app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/mod_feedback_slider" />
+        app:layout_constraintTop_toTopOf="@+id/mod_seqval_slider" />
 
     <SeekBar
         android:id="@+id/mod_depth_slider"
         android:layout_width="240dp"
         android:layout_height="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/mod_feedback_slider"
-        app:layout_constraintTop_toBottomOf="@+id/mod_feedback_slider" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/mod_seqval_slider"
+        app:layout_constraintTop_toBottomOf="@+id/mod_seqval_slider" />
 
     <TextView
         android:id="@+id/textView3"
@@ -74,6 +78,7 @@
         android:layout_marginLeft="20dp"
         android:text="DEPTH"
         android:textAlignment="textEnd"
+        app:layout_constraintEnd_toStartOf="@+id/mod_depth_slider"
         app:layout_constraintLeft_toLeftOf="@id/view"
         app:layout_constraintTop_toTopOf="@+id/mod_depth_slider" />
 
@@ -81,9 +86,10 @@
         android:id="@+id/mod_speed_slider"
         android:layout_width="240dp"
         android:layout_height="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/mod_depth_slider"
         app:layout_constraintTop_toBottomOf="@+id/mod_depth_slider" />
 
@@ -94,6 +100,7 @@
         android:layout_marginLeft="20dp"
         android:text="SPEED"
         android:textAlignment="textEnd"
+        app:layout_constraintEnd_toStartOf="@+id/mod_speed_slider"
         app:layout_constraintLeft_toLeftOf="@id/view"
         app:layout_constraintTop_toTopOf="@+id/mod_speed_slider" />
 
@@ -105,15 +112,18 @@
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/mod_speed_slider"
-        app:layout_constraintTop_toBottomOf="@+id/mod_speed_slider" />
+        app:layout_constraintTop_toBottomOf="@+id/mod_speed_slider"
+        android:visibility="invisible"/>
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/manual_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:text="MANUAL"
         android:textAlignment="textEnd"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/mod_manual_slider"
         app:layout_constraintLeft_toLeftOf="@id/view"
         app:layout_constraintTop_toTopOf="@+id/mod_manual_slider" />
 
