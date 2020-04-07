@@ -7,12 +7,140 @@
     tools:context=".ui.TunerFragment">
 
     <TextView
-        android:id="@+id/text_tuner"
+        android:id="@+id/text_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="376dp"
+        android:text="{note}"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/box_intune"
+        android:layout_width="27dp"
+        android:layout_height="96dp"
+        android:background="@drawable/empty_rectangle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/box_flat_1"
+        android:layout_width="27dp"
+        android:layout_height="86dp"
+        android:background="@drawable/empty_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/box_intune"
+        app:layout_constraintEnd_toStartOf="@+id/box_intune"
+        app:layout_constraintHorizontal_bias="0.963"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/box_flat_2"
+        android:layout_width="27dp"
+        android:layout_height="76dp"
+        android:background="@drawable/empty_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/box_flat_1"
+        app:layout_constraintEnd_toStartOf="@+id/box_flat_1"
+        app:layout_constraintHorizontal_bias="0.939"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/box_flat_3"
+        android:layout_width="27dp"
+        android:layout_height="66dp"
+        android:background="@drawable/empty_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/box_flat_2"
+        app:layout_constraintEnd_toStartOf="@+id/box_flat_2"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/box_flat_4"
+        android:layout_width="27dp"
+        android:layout_height="56dp"
+        android:background="@drawable/empty_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/box_flat_3"
+        app:layout_constraintEnd_toStartOf="@+id/box_flat_3"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <View
+        android:id="@+id/box_flat_5"
+        android:layout_width="27dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/empty_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/box_flat_4"
+        app:layout_constraintEnd_toStartOf="@+id/box_flat_4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/box_sharp_1"
+        android:layout_width="27dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/empty_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/box_intune"
+        app:layout_constraintStart_toEndOf="@+id/box_intune"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/box_sharp_2"
+        android:layout_width="27dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/empty_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/box_sharp_1"
+        app:layout_constraintStart_toEndOf="@+id/box_sharp_1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/box_sharp_3"
+        android:layout_width="27dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/empty_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/box_sharp_2"
+        app:layout_constraintStart_toEndOf="@+id/box_sharp_2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/box_sharp_4"
+        android:layout_width="27dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/empty_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/box_sharp_3"
+        app:layout_constraintStart_toEndOf="@+id/box_sharp_3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/box_sharp_5"
+        android:layout_width="27dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/empty_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/box_sharp_4"
+        app:layout_constraintStart_toEndOf="@+id/box_sharp_4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.ca13b.blackdroid.ui;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +23,13 @@ public class EffectsFragment extends Fragment {
 
     private EffectsViewModel effectsViewModel;
     private BlackstarAmp amp;
-    private final ReverbPedal reverbPedal = new ReverbPedal();
-    private final DelayPedal delayPedal = new DelayPedal();
-    private final ModPedal modPedal = new ModPedal();
+    private ReverbPedal reverbPedal = new ReverbPedal();
+    private DelayPedal delayPedal = new DelayPedal();
+    private ModPedal modPedal = new ModPedal();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        amp = ((MainActivity) getActivity()).blackstarAmp;
+        amp = new BlackstarAmp(getContext());
 
         effectsViewModel =
                 ViewModelProviders.of(this).get(EffectsViewModel.class);
@@ -45,7 +45,9 @@ public class EffectsFragment extends Fragment {
         int progress = 0;
 
         @Override
-        public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) { progress = progresValue;}
+        public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
+            progress = progresValue;
+        }
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -95,7 +97,15 @@ public class EffectsFragment extends Fragment {
             if (ctrlTemp == null) return;
             ctrlTemp.controlValue = progress;
             amp.SetControlValue(ctrlTemp, (progress*ctrlTemp.maxValue)/100);
-           // Toast.makeText(getContext(), String.format("I set %s to %d", ctrlTemp.controlName, progress), Toast.LENGTH_LONG).show();
         }
     };
+
+    @Override
+    public void onDestroy() {
+        amp = null;
+        reverbPedal = null;
+        modPedal = null;
+        delayPedal = null;
+        super.onDestroy();
+    }
 }

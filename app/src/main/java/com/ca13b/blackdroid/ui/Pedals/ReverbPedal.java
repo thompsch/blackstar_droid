@@ -82,7 +82,6 @@ public class ReverbPedal {
     private AdapterView.OnItemSelectedListener ddChange = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            ctrlReverbType.controlValue = position;
             amp.SetControlValue(ctrlReverbType, position);
         }
 
