@@ -1,6 +1,7 @@
 package com.ca13b.blackdroid.ui;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,10 +39,8 @@ public class ControlsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        amp = ((MainActivity)getActivity()).blackstarAmp;
+        amp = MainActivity.blackstarAmp;
 
-        controlsViewModel =
-                ViewModelProviders.of(this).get(ControlsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_controls, container, false);
 
         initializeControls(root);
@@ -78,9 +77,6 @@ public class ControlsFragment extends Fragment {
     }
 
     private void getInitialValues(){
-
-        //TODO: get amp settings and set controls accordingly!
-
         sbVolume.setProgress(ctrlVolume.controlValue);
         sbGain.setProgress(ctrlGain.controlValue);
         sbBass.setProgress(ctrlBass.controlValue);
@@ -142,7 +138,13 @@ public class ControlsFragment extends Fragment {
             if (ctrlTemp == null) return;
             ctrlTemp.controlValue = progress;
             amp.SetControlValue(ctrlTemp, (progress*ctrlTemp.maxValue)/100);
-            //Toast.makeText(getContext(), String.format("I set %s to %d", ctrlTemp.controlName, progress), Toast.LENGTH_LONG).show();
         }
     };
+
+    @Override
+    public void onDestroy() {
+        this.amp = null;
+
+        super.onDestroy();
+    }
 }

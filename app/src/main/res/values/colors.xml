@@ -6,4 +6,10 @@
     <color name="reverb_background">#68969B</color>
     <color name="delay_background">#9C76E1</color>
     <color name="mod_background">#C3CE5D</color>
+    <color name="tuner_0">#FF0000</color>
+    <color name="tuner_10">#FF8800</color>
+    <color name="tuner_20">#FFBB00</color>
+    <color name="tuner_30">#DDDD00</color>
+    <color name="tuner_40">#DDFF00</color>
+    <color name="tuner_50">#00FF00</color>
 </resources>

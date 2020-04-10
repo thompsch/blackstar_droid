@@ -112,7 +112,7 @@ public class ModPedal {
     private AdapterView.OnItemSelectedListener ddChange = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            ctrlModType.controlValue = position;
+            //ctrlModType.controlValue = position;
             
             switch (ctrlModType.controlValue){
                 case 0:

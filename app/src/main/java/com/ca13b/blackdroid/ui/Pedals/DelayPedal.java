@@ -93,9 +93,7 @@ public class DelayPedal {
     private AdapterView.OnItemSelectedListener ddChange = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            ctrlDelayType.controlValue = position;
             amp.SetControlValue(ctrlDelayType, position);
-
         }
 
         @Override
