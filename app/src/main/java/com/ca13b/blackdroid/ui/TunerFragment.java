@@ -4,6 +4,7 @@ package com.ca13b.blackdroid.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.ca13b.blackdroid.BlackstarAmp;
+import com.ca13b.blackdroid.MainActivity;
 import com.ca13b.blackdroid.R;
 
 import java.nio.ByteBuffer;
@@ -57,19 +59,7 @@ public class TunerFragment extends Fragment {
         put((byte)0x0C, "Eb");
     }};
 
-    private static ArrayList<View> allViews = new ArrayList<View>(){{
-        add(viewIntune);
-        add(viewFlat1);
-        add(viewFlat2);
-        add(viewFlat3);
-        add(viewFlat4);
-        add(viewFlat5);
-        add(viewSharp1);
-        add(viewSharp2);
-        add(viewSharp3);
-        add(viewSharp4);
-        add(viewSharp5);
-    }};
+    private static ArrayList<View> allViews;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -84,8 +74,7 @@ public class TunerFragment extends Fragment {
             }
         });
 
-        amp = new BlackstarAmp(getContext());
-
+        amp = MainActivity.blackstarAmp;
 
         viewFlat1 = root.findViewById(R.id.box_flat_1);
         viewFlat2 = root.findViewById(R.id.box_flat_2);
@@ -101,14 +90,36 @@ public class TunerFragment extends Fragment {
 
         tvNote = root.findViewById(R.id.text_note);
 
+        allViews = new ArrayList<View>(){{
+            add(viewIntune);
+            add(viewFlat1);
+            add(viewFlat2);
+            add(viewFlat3);
+            add(viewFlat4);
+            add(viewFlat5);
+            add(viewSharp1);
+            add(viewSharp2);
+            add(viewSharp3);
+            add(viewSharp4);
+            add(viewSharp5);
+        }};
 
-        //TODO notify amp tht we're in tuner mode
         amp.SwitchTunerMode(true);
+
+        ((MainActivity)getActivity()).setFragmentRefreshListener(new MainActivity.FragmentRefreshListener() {
+            @Override
+            public void onRefresh(ByteBuffer buffer) {
+                SetTunerUI(buffer);
+            }
+        });
+
+
 
         return root;
     }
 
-    public static void SetTunerUI(ByteBuffer packet) {
+
+    private void SetTunerUI(ByteBuffer packet) {
 /*
             # In this case, the amp is in tuner mode and this data is
             # tuning data. It has the form 09 NN PP ...  If there is
@@ -131,16 +142,15 @@ public class TunerFragment extends Fragment {
         }
 
         byte noteAsByte = packet.get(1);
-        int pitch_variance = packet.getInt(2);
+        int pitch_variance = packet.get(2);
 
         Log.i("BSD/TunerFragment", String.format("Tuner note %s pitch %s", noteAsByte, pitch_variance));
 
-        String note = byteToNote.getOrDefault(noteAsByte, "x");
+        String note = byteToNote.getOrDefault(noteAsByte, "--");
+
         tvNote.setText(note);
 
-        for (View v: allViews) {
-            v.setBackgroundColor(Color.WHITE);
-        }
+        clearAll();
 
         if (isBetween(pitch_variance, 0, 10)){
             viewFlat5.setBackgroundResource(R.color.tuner_0);
@@ -196,6 +206,24 @@ public class TunerFragment extends Fragment {
         }
         else if (isBetween(pitch_variance, 90, 100)){
             viewSharp5.setBackgroundResource(R.color.tuner_0);
+        }
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                clearAll();
+            }
+        }, 1000);
+
+    }
+
+    private void clearAll(){
+        for (View v: allViews) {
+            if (v==null){
+                Log.e("BSD/TunerFragment", "View is null");
+                continue;
+            }
+            v.setBackgroundColor(Color.WHITE);
         }
     }
 

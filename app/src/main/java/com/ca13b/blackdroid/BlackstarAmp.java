@@ -28,6 +28,7 @@ public class BlackstarAmp implements Serializable {
 
     public BlackstarAmp(Context context) {
 
+        usbCommunicator = new UsbCommunicator(context,this);
         _context = context;
 
         retryCount = 0;
@@ -70,6 +71,7 @@ public class BlackstarAmp implements Serializable {
 
 
         Log.i(tag, "Calling InitializeAmp now");
+
         if (usbCommunicator!=null) InitializeAmp();
     }
 
@@ -86,8 +88,7 @@ public class BlackstarAmp implements Serializable {
             startupPacket[6] = 0x01;
             startupPacket[7] = (byte) (0xFF & 0xFF);
 
-            usbCommunicator = new UsbCommunicator(_context, this, startupPacket);
-            new Thread(usbCommunicator).start();
+            usbCommunicator.SendData(startupPacket);
             Log.i(tag, "I've initialized the amp, yo: ");
         }
     }
@@ -269,8 +270,7 @@ public class BlackstarAmp implements Serializable {
         data[3] = 0x01;
         data[4] = on ? (byte)0x01 : (byte)0x00;
 
-        usbCommunicator = new UsbCommunicator(_context, this, data);
-        new Thread(usbCommunicator).start();
+        usbCommunicator.SendData(data);
     }
     public void SetControlValue(Control control, Integer value) {
 
@@ -299,8 +299,7 @@ public class BlackstarAmp implements Serializable {
             data[4] = control.controlValue.byteValue();
         }
 
-        usbCommunicator = new UsbCommunicator(_context, this, data);
-        new Thread(usbCommunicator).start();
+        usbCommunicator.SendData(data);
     }
 
     public static void HandlePresetNameResponse(ByteBuffer packet) {

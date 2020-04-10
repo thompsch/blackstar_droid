@@ -29,7 +29,7 @@ public class EffectsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        amp = new BlackstarAmp(getContext());
+        amp = MainActivity.blackstarAmp;
 
         effectsViewModel =
                 ViewModelProviders.of(this).get(EffectsViewModel.class);
