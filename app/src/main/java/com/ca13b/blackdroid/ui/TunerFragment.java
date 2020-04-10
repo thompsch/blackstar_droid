@@ -1,7 +1,4 @@
 package com.ca13b.blackdroid.ui;
-
-
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -156,26 +153,15 @@ public class TunerFragment extends Fragment {
             viewFlat5.setBackgroundResource(R.color.tuner_0);
         }
         else if (isBetween(pitch_variance, 10, 20)){
-            viewFlat5.setBackgroundResource(R.color.tuner_0);
             viewFlat4.setBackgroundResource(R.color.tuner_10);
         }
         else if (isBetween(pitch_variance, 20, 30)){
-            viewFlat5.setBackgroundResource(R.color.tuner_0);
-            viewFlat4.setBackgroundResource(R.color.tuner_10);
             viewFlat3.setBackgroundResource(R.color.tuner_20);
         }
         else if (isBetween(pitch_variance, 30, 40)){
-            viewFlat5.setBackgroundResource(R.color.tuner_0);
-            viewFlat4.setBackgroundResource(R.color.tuner_10);
-            viewFlat3.setBackgroundResource(R.color.tuner_20);
             viewFlat2.setBackgroundResource(R.color.tuner_30);
         }
         else if (isBetween(pitch_variance, 40, 45)){
-            viewFlat5.setBackgroundResource(R.color.tuner_0);
-            viewFlat4.setBackgroundResource(R.color.tuner_10);
-            viewFlat3.setBackgroundResource(R.color.tuner_20);
-            viewFlat2.setBackgroundResource(R.color.tuner_30);
-            viewFlat1.setBackgroundResource(R.color.tuner_40);
             viewIntune.setBackgroundResource(R.color.tuner_40);
         }
         else if (isBetween(pitch_variance, 45, 55)){
@@ -183,26 +169,15 @@ public class TunerFragment extends Fragment {
         }
         else if (isBetween(pitch_variance, 55, 60)){
             viewIntune.setBackgroundResource(R.color.tuner_40);
-            viewSharp1.setBackgroundResource(R.color.tuner_40);
-            viewSharp2.setBackgroundResource(R.color.tuner_30);
-            viewSharp3.setBackgroundResource(R.color.tuner_20);
-            viewSharp4.setBackgroundResource(R.color.tuner_10);
-            viewSharp5.setBackgroundResource(R.color.tuner_0);
         }
         else if (isBetween(pitch_variance, 60, 70)){
             viewSharp2.setBackgroundResource(R.color.tuner_30);
-            viewSharp3.setBackgroundResource(R.color.tuner_20);
-            viewSharp4.setBackgroundResource(R.color.tuner_10);
-            viewSharp5.setBackgroundResource(R.color.tuner_0);
         }
         else if (isBetween(pitch_variance, 70, 80)){
             viewSharp3.setBackgroundResource(R.color.tuner_20);
-            viewSharp4.setBackgroundResource(R.color.tuner_10);
-            viewSharp5.setBackgroundResource(R.color.tuner_0);
         }
         else if (isBetween(pitch_variance, 80, 90)){
             viewSharp4.setBackgroundResource(R.color.tuner_10);
-            viewSharp5.setBackgroundResource(R.color.tuner_0);
         }
         else if (isBetween(pitch_variance, 90, 100)){
             viewSharp5.setBackgroundResource(R.color.tuner_0);
@@ -213,7 +188,7 @@ public class TunerFragment extends Fragment {
             public void run() {
                 clearAll();
             }
-        }, 1000);
+        }, 500);
 
     }
 

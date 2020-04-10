@@ -9,6 +9,7 @@ import android.hardware.usb.UsbManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ca13b.blackdroid.ui.TunerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public static BlackstarAmp blackstarAmp;
     private static MainActivity instance;
     NavController navController;
+    public static Thread usbReceiverThread;
 
     public FragmentRefreshListener getFragmentRefreshListener() {
         return fragmentRefreshListener;
@@ -60,8 +62,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
-        registerReceiver(usbReceiver, filter);
+        IntentFilter detachedFilter = new IntentFilter();
+        detachedFilter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
+        registerReceiver(usbReceiver, detachedFilter);
+
+        IntentFilter permissionFilter = new IntentFilter(ACTION_USB_PERMISSION);
+        registerReceiver(usbReceiver, permissionFilter);
 
         blackstarAmp = new BlackstarAmp(this);
 
@@ -90,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
             String action = intent.getAction();
             UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
             if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
-
                 if (device != null) {
                     Log.i("BSD/MainActivity", "Broadcast receiver for device " + device.toString());
                 }
@@ -101,7 +106,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)){
                 Log.i("BSD/BroadcastReceiver", "Device detached");
-                device = null;
+                Toast.makeText(getApplicationContext(), "The connection to the amp has been lost. Check the cable!", Toast.LENGTH_LONG ).show();
+                //todo: kill all threads
+                usbReceiverThread.interrupt();
+            } else if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)){
+                Log.i("BSD/BroadcastReceiver", "Device attached");
+                //Toast.makeText(getApplicationContext(), "The connection to the amp has been lost. Check the cable!", Toast.LENGTH_LONG ).show();
+                //todo: call init again to reset controls
             }
         }
 
@@ -115,5 +126,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         unregisterReceiver(usbReceiver);
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

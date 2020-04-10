@@ -1,13 +1,10 @@
 package com.ca13b.blackdroid;
 import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 import java.util.HashMap;
 
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.hardware.usb.UsbConstants;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
@@ -15,9 +12,6 @@ import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbRequest;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,9 +30,6 @@ public class UsbCommunicator {
     private UsbEndpoint epToDevice;
     private UsbEndpoint epFromDevice;
 
-    private TextView logView;
-
-    
     private final String tag = "BSD/UsbCommunicator";
     private final BlackstarAmp amp;
 
@@ -49,8 +40,6 @@ public class UsbCommunicator {
     }
 
     public void setUpDevice() {
-
-
         usbManager = (UsbManager) _context.getSystemService(Context.USB_SERVICE);
 
         Intent intent = ((MainActivity) _context).getIntent();
@@ -60,6 +49,10 @@ public class UsbCommunicator {
             if (device == null) {
                 Log.i(tag, "Device is null; iterating instead.");
                 usbDevice = iterateUsbDevices();
+                if (usbDevice == null){
+                    Toast.makeText(_context, "No Blackstar amp is connected!", Toast.LENGTH_LONG).show();
+                    return;
+                }
             } else usbDevice = device;
 
             if (usbDevice == null) {
@@ -81,10 +74,10 @@ public class UsbCommunicator {
             }
 
             UsbRunnable runnable = new UsbRunnable(usbConnection, epFromDevice, amp);
-            new Thread(runnable).start();
+            MainActivity.usbReceiverThread = new Thread(runnable);
+            MainActivity.usbReceiverThread.start();
         }
     }
-
 
     public void SendData(byte[] data) {
         ByteBuffer buffer = ByteBuffer.wrap(data);
@@ -93,7 +86,6 @@ public class UsbCommunicator {
 
         Log.i(tag, "Sending packet of length " + data.length);
         Log.i(tag, "Sending data: " + parsePacket(buffer));
-
 
         if (usbConnection == null) {
             Log.e(tag, "mConnection is null :( ");
@@ -106,9 +98,7 @@ public class UsbCommunicator {
 
         bufferIn.rewind();
         Log.i(tag, "Buffer in: " + parsePacket(bufferIn));
-
     }
-
 
     private UsbDevice iterateUsbDevices() {
 
@@ -140,6 +130,7 @@ public class UsbCommunicator {
 
     @Override
     protected void finalize() throws Throwable {
+        MainActivity.usbReceiverThread.interrupt();
         super.finalize();
     }
 }
